@@ -5,6 +5,8 @@ import { useEffect, useId, useState } from "react";
 import { RulesList } from "@/components/rules-list";
 import { siteConfig } from "@/lib/config";
 
+const RULES_SEEN_KEY = "smusmp-rules-accepted";
+
 type MrpackDownloadButtonProps = {
   size?: "sm" | "lg";
 };
@@ -14,8 +16,19 @@ export function MrpackDownloadButton({
 }: MrpackDownloadButtonProps) {
   const [open, setOpen] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [rulesSeen, setRulesSeen] = useState(false);
   const titleId = useId();
   const isLarge = size === "lg";
+
+  useEffect(() => {
+    function sync() {
+      setRulesSeen(window.sessionStorage.getItem(RULES_SEEN_KEY) === "1");
+    }
+
+    sync();
+    window.addEventListener("smusmp-rules-accepted", sync);
+    return () => window.removeEventListener("smusmp-rules-accepted", sync);
+  }, []);
 
   useEffect(() => {
     if (!open) {
@@ -43,23 +56,39 @@ export function MrpackDownloadButton({
     setAccepted(false);
   }
 
-  function download() {
-    window.open(siteConfig.modsDownloadUrl, "_blank", "noopener,noreferrer");
+  function rememberRules() {
+    window.sessionStorage.setItem(RULES_SEEN_KEY, "1");
+    window.dispatchEvent(new Event("smusmp-rules-accepted"));
+    setRulesSeen(true);
     close();
   }
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className={`inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-100 font-semibold text-zinc-950 transition-colors hover:bg-white ${
-          isLarge ? "h-11 px-4 text-sm" : "h-9 px-3 text-sm"
-        }`}
-      >
-        <FileArchive className={isLarge ? "size-4" : "size-3.5"} aria-hidden />
-        Descargar .mrpack
-      </button>
+      {rulesSeen ? (
+        <a
+          href={siteConfig.modsDownloadUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-100 font-semibold text-zinc-950 transition-colors hover:bg-white ${
+            isLarge ? "h-11 px-4 text-sm" : "h-9 px-3 text-sm"
+          }`}
+        >
+          <FileArchive className={isLarge ? "size-4" : "size-3.5"} aria-hidden />
+          Descargar .mrpack
+        </a>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className={`inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-100 font-semibold text-zinc-950 transition-colors hover:bg-white ${
+            isLarge ? "h-11 px-4 text-sm" : "h-9 px-3 text-sm"
+          }`}
+        >
+          <FileArchive className={isLarge ? "size-4" : "size-3.5"} aria-hidden />
+          Descargar .mrpack
+        </button>
+      )}
 
       {open ? (
         <div
@@ -121,15 +150,25 @@ export function MrpackDownloadButton({
                 >
                   Cancelar
                 </button>
-                <button
-                  type="button"
-                  disabled={!accepted}
-                  onClick={download}
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40"
+                <a
+                  href={accepted ? siteConfig.modsDownloadUrl : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-disabled={!accepted}
+                  onClick={(event) => {
+                    if (!accepted) {
+                      event.preventDefault();
+                      return;
+                    }
+                    rememberRules();
+                  }}
+                  className={`inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-4 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-400 ${
+                    accepted ? "" : "pointer-events-none opacity-40"
+                  }`}
                 >
                   <FileArchive className="size-4" aria-hidden />
                   Descargar .mrpack
-                </button>
+                </a>
               </div>
             </div>
           </div>
