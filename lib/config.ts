@@ -12,6 +12,9 @@ export const siteConfig = {
   minecraftVersion: "1.21.1",
   loader: "NeoForge",
   pollIntervalMs: 30_000,
+  timeZone: "Europe/Madrid",
+  dailyRestartHour: 10,
+  saturdayEventHour: 15,
   mods: [
     {
       name: "Create",

@@ -3,6 +3,8 @@ import { BlueMapViewer } from "@/components/bluemap-viewer";
 import { CopyIpButton } from "@/components/copy-ip-button";
 import { FirstVisitModal } from "@/components/first-visit-modal";
 import { Header } from "@/components/header";
+import { LaunchGate } from "@/components/launch-gate";
+import { ServerSchedule } from "@/components/server-schedule";
 import { ServerStatus } from "@/components/server-status";
 import { siteConfig } from "@/lib/config";
 import { getServerStatus } from "@/lib/get-server-status";
@@ -39,17 +41,22 @@ export default async function Home() {
           </div>
           <div className="flex flex-col gap-2 sm:items-end">
             <CopyIpButton />
-            <Link
-              href="/mapa"
-              className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
-            >
-              Mapa a pantalla completa
-            </Link>
+            <LaunchGate>
+              <Link
+                href="/mapa"
+                className="text-sm text-zinc-400 transition-colors hover:text-zinc-100"
+              >
+                Mapa a pantalla completa
+              </Link>
+            </LaunchGate>
           </div>
         </section>
 
-        <BlueMapViewer embedded />
-        <ServerStatus initialData={initialStatus} />
+        <ServerSchedule />
+        <LaunchGate>
+          <BlueMapViewer embedded />
+          <ServerStatus initialData={initialStatus} />
+        </LaunchGate>
       </main>
       <footer className="border-t border-zinc-800/80 py-6 text-center text-sm text-zinc-600">
         {siteConfig.minecraftVersion} · {siteConfig.loader} · {siteConfig.name}
