@@ -54,8 +54,10 @@ export default async function Home() {
 
         <ServerSchedule />
         <LaunchGate>
-          <BlueMapViewer embedded />
-          <ServerStatus initialData={initialStatus} />
+          <div className="grid items-stretch gap-3 lg:grid-cols-[minmax(0,1fr)_17rem] lg:grid-rows-[36rem]">
+            <BlueMapViewer embedded />
+            <ServerStatus initialData={initialStatus} />
+          </div>
         </LaunchGate>
       </main>
       <footer className="border-t border-zinc-800/80 py-6 text-center text-sm text-zinc-600">

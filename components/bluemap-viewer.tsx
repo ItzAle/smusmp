@@ -10,7 +10,7 @@ export function BlueMapViewer({ embedded = false }: BlueMapViewerProps) {
     <div
       className={
         embedded
-          ? "flex h-[32rem] flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 sm:h-[40rem]"
+          ? "flex h-[28rem] min-h-0 flex-col overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 lg:h-[36rem]"
           : "flex min-h-0 flex-1 flex-col"
       }
     >
