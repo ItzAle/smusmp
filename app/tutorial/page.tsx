@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { InstallTutorial } from "@/components/install-tutorial";
-import { ModsCard } from "@/components/mods-card";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -23,16 +22,15 @@ export default function TutorialPage() {
             Guía de instalación
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-zinc-50 sm:text-4xl">
-            Entra al SMP en cuatro pasos
+            Entra al SMP en tres pasos
           </h1>
           <p className="text-base leading-relaxed text-zinc-400">
-            Descarga Modrinth App, añade una instancia nueva e importa el
-            archivo <span className="font-mono text-zinc-300">.mrpack</span> del
-            pack. No instales Forge ni copies mods a mano.
+            Instala Modrinth App y pide por privado el enlace del perfil con los
+            mods. Ese enlace caduca a los 7 días. Después entra con la IP del
+            servidor.
           </p>
         </div>
         <InstallTutorial heading="Pasos" />
-        <ModsCard />
       </main>
     </div>
   );

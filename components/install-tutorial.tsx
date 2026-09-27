@@ -1,34 +1,26 @@
-import { BookOpen, Download, FileArchive, Plus, Server } from "lucide-react";
+import { BookOpen, Download, Link2, Server } from "lucide-react";
 import { CopyIpButton } from "@/components/copy-ip-button";
-import { MrpackDownloadButton } from "@/components/mrpack-download-button";
 import { siteConfig } from "@/lib/config";
 
 const steps = [
   {
     n: "1",
     title: "Descarga Modrinth App",
-    body: "Instala el launcher oficial e inicia sesión con tu cuenta de Microsoft. Sin esto no se puede importar el pack.",
+    body: "Instala el launcher oficial e inicia sesión con tu cuenta de Microsoft. Sin esto no se puede abrir el perfil del servidor.",
     icon: Download,
     extra: "app" as const,
   },
   {
     n: "2",
-    title: "Descarga el archivo .mrpack",
-    body: "Es la carpeta del pack de este SMP (Minecraft 1.21.1 / NeoForge) comprimida para Modrinth. Guárdala donde la encuentres fácil.",
-    icon: FileArchive,
-    extra: "mrpack" as const,
-  },
-  {
-    n: "3",
-    title: "Añade una instancia e importa el .mrpack",
-    body: "Abre Modrinth App, pulsa + para añadir una instancia y elige importar desde archivo. Selecciona el .mrpack que acabas de bajar y espera a que se instalen los mods.",
-    icon: Plus,
+    title: "Pide el enlace privado del perfil",
+    body: "El pack no se descarga como archivo. Pide por privado el enlace de la instancia de Modrinth donde están los mods. Ese enlace caduca a los 7 días: si ya no abre, pide otro. Ábrelo con Modrinth App y espera a que se instale el perfil.",
+    icon: Link2,
     extra: null,
   },
   {
-    n: "4",
+    n: "3",
     title: "Entra al servidor",
-    body: "Cuando termine, pulsa Play. En Minecraft simplemente pulsa en, Unirse a SMU",
+    body: "Cuando termine la instalación, pulsa Play. En Minecraft ve a Multijugador, añade un servidor y pega la IP.",
     icon: Server,
     extra: "ip" as const,
   },
@@ -56,9 +48,8 @@ export function InstallTutorial({
               {heading}
             </h2>
             <p className="mt-1 max-w-xl text-sm text-zinc-400">
-              Primero el launcher, luego importas el{" "}
-              <span className="font-mono text-zinc-300">.mrpack</span> como
-              instancia nueva. No copies mods a mano.
+              Instala Modrinth App y pide el enlace privado del perfil. No hace
+              falta un archivo .mrpack.
             </p>
           </div>
         </div>
@@ -102,11 +93,6 @@ export function InstallTutorial({
                     <Download className="size-3.5" aria-hidden />
                     Abrir descarga de Modrinth App
                   </a>
-                ) : null}
-                {step.extra === "mrpack" ? (
-                  <div className="mt-3">
-                    <MrpackDownloadButton size="sm" />
-                  </div>
                 ) : null}
                 {step.extra === "ip" ? (
                   <div className="mt-3">

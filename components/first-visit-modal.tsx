@@ -4,7 +4,6 @@ import { X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { InstallTutorial } from "@/components/install-tutorial";
-import { ModsCard } from "@/components/mods-card";
 
 const STORAGE_KEY = "smusmp-welcome-seen";
 
@@ -69,8 +68,9 @@ export function FirstVisitModal() {
               Cómo entrar al servidor
             </h2>
             <p className="mt-1 text-sm text-zinc-400">
-              Instala el pack y luego verás el mapa y los jugadores. Las normas
-              están en el menú de arriba. Esta guía no vuelve a salir sola.
+              Instala Modrinth App y pide el enlace privado del perfil. Las
+              normas están en el menú de arriba. Esta guía no vuelve a salir
+              sola.
             </p>
           </div>
           <button
@@ -85,7 +85,6 @@ export function FirstVisitModal() {
 
         <div className="flex flex-col gap-4 overflow-y-auto px-4 py-4 sm:px-5">
           <InstallTutorial heading="Pasos" />
-          <ModsCard />
           <p className="text-sm text-zinc-400">
             Lee las{" "}
             <Link href="/normas" className="text-emerald-400 hover:text-emerald-300">

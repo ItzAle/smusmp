@@ -35,18 +35,48 @@ export const siteConfig = {
   ],
   rules: [
     {
-      title: "Respeta a los demás",
-      description: "Sin insultos, acoso ni toxicidad en el chat ni por voz.",
+      title: "Trato entre jugadores",
+      description:
+        "Sin insultos, acoso ni toxicidad en el chat ni por voz. No se molesta a otros jugadores.",
     },
     {
-      title: "No grief ni robos",
+      title: "Nada de grief",
       description:
-        "No rompas, robes ni sabotees lo que no sea tuyo. Pide permiso antes de construir cerca de otra base.",
+        "No rompas, sabotées ni grifees lo que no sea tuyo.",
     },
     {
-      title: "No matar al dragon ni ir al end",
+      title: "Nada de explosiones",
       description:
-        "No se puede ir al end ni matar al dragon por temas logicos, se hará en un evento todos juntos y luego ya se podrá hacer lo que quieras",
+        "Prohibido explotar bases, terreno ajeno o cualquier cosa que no sea tuya.",
+    },
+    {
+      title: "Nada de robos",
+      description: "No robes cofres, granjas ni objetos de otros jugadores.",
+    },
+    {
+      title: "Zona de bases",
+      description:
+        "Las bases tienen que estar dentro del cuadrado de 10000 a -10000, para que queden más o menos juntas.",
+    },
+    {
+      title: "Elegir terreno",
+      description:
+        "Si quieres una zona para tu base, se habla. Si alguien ya está ahí, se respeta: el mundo es muy grande.",
+    },
+    {
+      title: "Mods de cliente",
+      description:
+        "Se permiten algunos mods solo de cliente, como el zoom o el minimapa, siempre que no estén rotos ni den ventaja injusta.",
+    },
+    {
+      title: "Granjas comunitarias",
+      description:
+        "Habrá algunas granjas comunitarias para evitar lag. No montes granjas enormes por tu cuenta si ya existe una compartida.",
+    },
+    {
+      title: "El End y el dragón",
+      description:
+        "No se puede ir al End ni matar al dragón hasta el evento en grupo. Después, cada uno puede hacer lo que quiera.",
     },
   ],
 } as const;
